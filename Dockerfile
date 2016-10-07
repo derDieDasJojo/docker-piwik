@@ -38,7 +38,9 @@ RUN curl -fsSL -o /usr/src/piwik/misc/GeoIPCity.dat.gz http://geolite.maxmind.co
  && gunzip /usr/src/piwik/misc/GeoIPCity.dat.gz
 
 COPY docker-entrypoint.sh /entrypoint.sh
-
+RUN  tar cf - --one-file-system -C /usr/src/piwik . | tar xf -
+RUN  chown -R www-data .
+COPY global.ini.php /var/www/html/config/global.ini.php
 # WORKDIR is /var/www/html (inherited via "FROM php")
 # "/entrypoint.sh" will populate it at container startup from /usr/src/piwik
 VOLUME /var/www/html
