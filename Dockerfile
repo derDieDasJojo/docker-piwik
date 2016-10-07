@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:5.6-apache
 
 MAINTAINER pierre@piwik.org
 
@@ -44,4 +44,4 @@ COPY docker-entrypoint.sh /entrypoint.sh
 VOLUME /var/www/html
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
